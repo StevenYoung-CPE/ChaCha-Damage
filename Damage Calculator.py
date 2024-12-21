@@ -1,6 +1,6 @@
 import random
 from Pokemons import Pokemon
-# Pokemon are defined by Pokemon(Lvl,Atk,Def,Spatk,Spdef)
+# Pokemon are defined by Pokemon(Lvl,Atk,Def,Spatk,Spdef), For sure for sure
 with open('Pokemon List.txt','r') as PL:
     print(PL.read())
     for line in PL:
