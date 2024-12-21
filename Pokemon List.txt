@@ -1,2 +1,3 @@
-Bisharp 128 113 69 76
-Vikavolt 90 109 163 85
+Bisharp 9 128 113 69 76
+Vikavolt 10 90 109 163 85
+Chandelure 9 57 89 142 95
