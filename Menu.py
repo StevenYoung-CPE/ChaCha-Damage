@@ -10,12 +10,15 @@ def pfinder(Pokedex,name):
 
 with open('Pokemon List.txt', 'r') as PL:
     Plist = []
-    Nlist = []
     for line in PL:
         mon = line.strip().split()
         name, lvl, atk, defense, spatk, spdef = mon
         Plist.append(Pokemon(name, int(lvl), int(atk), int(defense), int(spatk), int(spdef)))
-        Nlist.append(name)
+with open('Relevant Mons.txt', 'r') as Pokedex:
+    Rlist = []
+    for line in Pokedex:
+        mon = line.strip()
+        Rlist.append(mon)
 
 def exit():
     root.destroy()
@@ -24,12 +27,12 @@ def create_menu():
     global root
     root = tk.Tk()
     root.title('ChaCha Damage Sim')
-    root.geometry('400x500')
+    root.geometry('450x370')
    
     Samon = StringVar(root)
-    Samon.set(Nlist[0])
+    Samon.set(Rlist[0])
     Sdmon = StringVar(root)
-    Sdmon.set(Nlist[0])
+    Sdmon.set(Rlist[0])
     
     BP = IntVar(root)
     BP.set(1)
@@ -49,29 +52,33 @@ def create_menu():
     PS = StringVar()
     PS.set('Physical')
     def damage():
-        print('Damage started')
-        print(Crit.get())
         if Crit.get() == 0:
             Tcrit = 1
         if Crit.get() == 1:
             Tcrit = 1.5
         Atker = Samon.get()
+        print(Atker)
         Dfer = Sdmon.get()
         Atker = pfinder(Plist,Atker)
         Dfer = pfinder(Plist,Dfer)
         if PS.get() == 'Physical':
-            print('physical Identified')
             Atker.StatChange(Stagea.get(),'Atk')
             Dfer.StatChange(Staged.get(),'Def')
+            print(Atker.Atk)
             Damage = (10*Atker.Level+10)/250*Atker.Atk/Dfer.defense*BP.get()*float(SB.get())*float(Eff.get())*float(Misc.get())*Tcrit
             messagebox.showinfo("Damage Report",(f'{Dfer.Name} takes {Damage}'))
+            Atker.StatChange(-1*Stagea.get(),'Atk')
+            Dfer.StatChange(-1*Staged.get(),'Def')
+            print(Atker.Atk)
         if PS.get() == 'Special':
             Atker.StatChange(Stagea.get(),'Spatk')
             Dfer.StatChange(Staged.get(),'Spdef')
             Damage = (10*Atker.Level+10)/250*Atker.Spatk/Dfer.Spdef*BP.get()*float(SB.get())*float(Eff.get())*float(Misc.get())*Tcrit
             messagebox.showinfo("Damage Report",(f'{Dfer.Name} takes {Damage}'))
+            Atker.StatChange(-1*Stagea.get(),'Spatk')
+            Dfer.StatChange(-1*Staged.get(),'Spdef')
 
-    title_label = tk.Label(root, text = "IDK", font=("Impact",16))
+    title_label = tk.Label(root, text = "ChaCha Damage Sim", font=("Impact",16))
 
     Attacker_label = tk.Label(root, text="Attacker", font=("Arial",10))
 
@@ -89,9 +96,9 @@ def create_menu():
 
     Eff_label = tk.Label(root,text='Type Effectiveness Mult?',font=("Arial",10))
 
-    paselect = OptionMenu(root,Samon,*Nlist)
+    paselect = OptionMenu(root,Samon,*Rlist)
 
-    pdselect = OptionMenu(root,Sdmon,*Nlist)
+    pdselect = OptionMenu(root,Sdmon,*Rlist)
     
 
     Critter = tk.Checkbutton(root,text='Crit?',variable=Crit)
@@ -130,9 +137,8 @@ def create_menu():
     Stab.grid(column=0,row=9)
     Eff_label.grid(column=0,row=10)
     Effective.grid(column=0,row=11)
-    
-    Miscil_label.grid(column=0,row=13)
-    Miscil.grid(column=0,row=14)
+    Miscil_label.grid(column=0,row=12)
+    Miscil.grid(column=0,row=13)
 
     title_label.grid(column=1,row=0)
     Critter.grid(column=1,row=12)
