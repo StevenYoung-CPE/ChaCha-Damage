@@ -1,7 +1,8 @@
 import random
+import tkinter as tk
+from tkinter import *
 from Pokemons import Pokemon
-# Pokemon are defined by Pokemon(Lvl,Atk,Def,Spatk,Spdef), For sure for sure
-
+# Pokemon are defined by Pokemon(Lvl,Atk,Def,Spatk,Spdef)
 with open('Pokemon List.txt', 'r') as PL:
     Plist = []
     for line in PL:
