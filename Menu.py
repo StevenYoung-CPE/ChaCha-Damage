@@ -7,7 +7,6 @@ def pfinder(Pokedex,name):
     for poke in Pokedex:
         if poke.Name == name:
             return poke
-
 with open('Pokemon List.txt', 'r') as PL:
     Plist = []
     for line in PL:
@@ -22,7 +21,6 @@ with open('Relevant Mons.txt', 'r') as Pokedex:
 
 def exit():
     root.destroy()
-
 def create_menu():
     global root
     root = tk.Tk()
@@ -38,11 +36,11 @@ def create_menu():
     BP.set(1)
     SB = StringVar(root)
     SB.set(1)
-    Misc = IntVar(root)
+    Misc = StringVar(root)
     Misc.set(1)
     Crit = IntVar(root)
     Crit.set(0)
-    Eff = IntVar(root)
+    Eff = StringVar(root)
     Eff.set(1)
     Stages = [-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6]
     Stagea = IntVar()
@@ -57,14 +55,13 @@ def create_menu():
         if Crit.get() == 1:
             Tcrit = 1.5
         Atker = Samon.get()
-        print(Atker)
         Dfer = Sdmon.get()
         Atker = pfinder(Plist,Atker)
         Dfer = pfinder(Plist,Dfer)
         if PS.get() == 'Physical':
             Atker.StatChange(Stagea.get(),'Atk')
             Dfer.StatChange(Staged.get(),'Def')
-            print(Atker.Atk)
+            print(Misc.get())
             Damage = (10*Atker.Level+10)/250*Atker.Atk/Dfer.defense*BP.get()*float(SB.get())*float(Eff.get())*float(Misc.get())*Tcrit
             messagebox.showinfo("Damage Report",(f'{Dfer.Name} takes {Damage}'))
             Atker.StatChange(-1*Stagea.get(),'Atk')
@@ -147,19 +144,12 @@ def create_menu():
     Damage_Button.grid(column=1,row=6)
     exit_button.grid(column=1,row=15)
 
-
     Defender_label.grid(column=2,row=1)
     pdselect.grid(column=2,row=2)
     Statchanged_label.grid(column=2,row=3)
     StatChanged.grid(column=2,row=4)
 
-
-
-
-
     root.mainloop()
-
-
    
 if __name__ == "__main__":
     create_menu()
