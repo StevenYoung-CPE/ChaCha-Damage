@@ -3,22 +3,23 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 from Pokemons import Pokemon
 
-def pfinder(Pokedex,name):
+
+def pfinder(Pokedex,name): #Turn pokemon name input into a Pokemon class
     for poke in Pokedex:
         if poke.Name == name:
             return poke
-with open('Pokemon List.txt', 'r') as PL:
+with open('Pokemon List.txt', 'r') as PL: #This list contains all pokemon that you have stats for.
     Plist = []
     for line in PL:
         mon = line.strip().split()
         name, lvl, atk, defense, spatk, spdef = mon
         Plist.append(Pokemon(name, int(lvl), int(atk), int(defense), int(spatk), int(spdef)))
-with open('Relevant Mons.txt', 'r') as Pokedex:
+with open('Relevant Mons.txt', 'r') as Pokedex: #All pokemon names in this list will appear in the drop down menu. Ideally kept small
     Rlist = []
     for line in Pokedex:
         mon = line.strip()
         Rlist.append(mon)
-
+    Rlist.sort()
 def exit():
     root.destroy()
 def create_menu():
@@ -26,7 +27,7 @@ def create_menu():
     root = tk.Tk()
     root.title('ChaCha Damage Sim')
     root.geometry('450x370')
-   
+
     Samon = StringVar(root)
     Samon.set(Rlist[0])
     Sdmon = StringVar(root)
