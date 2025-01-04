@@ -1,6 +1,9 @@
 Welcome to the Chambers And Charizards Damage Simulator!
 This doccument will outline the infrastructure that the program uses, and help clarify how it is intended to be used
 
+The correct file to run is the Menu.py
+Pokemons.py is not inteneded to be run
+
 Pokemon List is a text File that contains the information needed to run the damage calculation for all pokemon in your campaign (you will need to input this)
 
 The formating is Name LVL ATK DEF SPATK SPDEF. This information must be sepperated by spaces, and must be in this order, with no other text (The name can contain no spaces)
